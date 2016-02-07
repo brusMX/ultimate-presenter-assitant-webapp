@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  div.container
+    div.row
+        h1 Rate your presenter
+        h3 Jocupi
+        p Azure incredible conference - AIC101
+  div.row
+  form(action="/like", method="post")
+    button.btn(type="submit") Like
+  div.row
+  form(action="/dislike", method="post")
+    button.btn(type="submit") Dislike   

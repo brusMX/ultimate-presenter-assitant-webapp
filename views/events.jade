@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  h1 #{title}
+  br
+
+  form(action="/completetask", method="post")
+    table.table.table-striped.table-bordered
+      tr
+        td Presentation
+        td Speaker
+        td Category
+        td Session Code
+        td Start time
+        td End time
+      if (typeof presentations === "undefined")
+        tr
+          td
+      else
+        each presentation in presentations
+          tr
+            td #{presentation.title}
+            td #{presentation.speaker}
+            td #{presentation.category}
+            td #{presentation.sessionCode}
+            - var date  = new Date(presentation.startTime);
+            - var day   = date.getDate();
+            - var month = date.getMonth() + 1;
+            - var year  = date.getFullYear();
+            td #{month + "/" + day + "/" + year}
+            - var date  = new Date(presentation.stopTime);
+            - var day   = date.getDate();
+            - var month = date.getMonth() + 1;
+            - var year  = date.getFullYear();
+            td #{month + "/" + day + "/" + year}
+
+  hr
+  form.well(action="/addtask", method="post")
+    label Item Name:
+    input(name="name", type="textbox")
+    label Item Category:
+    input(name="category", type="textbox")
+    br
+    button.btn(type="submit") Add item
